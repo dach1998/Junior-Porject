@@ -1,2 +1,2 @@
-# Junior-Porject
+# Junior-Project
 Тестовое задание
