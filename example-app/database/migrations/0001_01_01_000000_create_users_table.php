@@ -21,6 +21,15 @@ return new class extends Migration
             $table->timestamps();
         });
 
+        // Создание начального пользователя
+        DB::table('users')->insert([
+           'name' => 'Admin',
+            'email' => 'admin@admin.com',
+            'password' => Hash::make('password'),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
             $table->string('token');
