@@ -2,20 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Employee;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
-use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
+use App\Models\Employee;
 
 class EmployeeController extends Controller
 {
-    // Отображение всех сотрудников
     public function index()
     {
-        $employees = Employee::all();
-        return view('employees.index', compact('employees'));
+        $employees = Employee::paginate(10);
+        return view('employee.index', compact('employees'));
     }
 
 
+    public function create()
+    {
+        return view('employee.create');
+    }
+
+    public function store(Request $request)
+    {
+        $data = $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'company' => 'required',
+            'email' => 'required|email|unique:employees,email',
+            'phone_number' => 'required|numeric|digits:11|unique:employees,phone_number',
+        ]);
+        Employee::create($data);
+        return redirect()->route('employee.index');
+    }
 }
