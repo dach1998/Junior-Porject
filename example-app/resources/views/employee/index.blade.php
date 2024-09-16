@@ -39,7 +39,7 @@
                                 <td class="px-4 py-3 border-b border-gray-700">{{ $employee->email }}</td>
                                 <td class="px-4 py-3 border-b border-gray-700">{{ $employee->phone_number }}</td>
                                 <td class="px-4 py-3 border-b border-gray-700">
-                                    <form action="{{ route('employee.delete', $employee) }}" method="post">
+                                    <form class="my-0" action="{{ route('employee.delete', $employee) }}" method="post">
                                         @csrf
                                         @method('delete')
                                         <button type="submit" class="btn btn-danger">DEL</button>
