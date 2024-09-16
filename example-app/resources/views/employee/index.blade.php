@@ -26,6 +26,7 @@
                             <th class="px-4 py-3 title-font font-medium bg-gray-800 text-white border-b border-gray-700">Company</th>
                             <th class="px-4 py-3 title-font font-medium bg-gray-800 text-white border-b border-gray-700">Email</th>
                             <th class="px-4 py-3 title-font font-medium bg-gray-800 text-white border-b border-gray-700">Phone Number</th>
+                            <th class="px-4 py-3 title-font font-medium bg-gray-800 text-white border-b border-gray-700">DEL</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -37,6 +38,13 @@
                                 <td class="px-4 py-3 border-b border-gray-700">{{ $employee->company }}</td>
                                 <td class="px-4 py-3 border-b border-gray-700">{{ $employee->email }}</td>
                                 <td class="px-4 py-3 border-b border-gray-700">{{ $employee->phone_number }}</td>
+                                <td class="px-4 py-3 border-b border-gray-700">
+                                    <form action="{{ route('employee.delete', $employee) }}" method="post">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn btn-danger">DEL</button>
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>
