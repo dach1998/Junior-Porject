@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('logotype')->nullable();
             $table->string('website');
             $table->timestamps();
+
+            $table->softDeletes();
         });
     }
 
