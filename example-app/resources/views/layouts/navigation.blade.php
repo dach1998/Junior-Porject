@@ -17,7 +17,7 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('employeе.index')" :active="request()->routeIs('employeе.index')">
+                    <x-nav-link :href="route('employee.index')" :active="request()->routeIs('employee.index')">
                         {{ __('Employees') }}
                     </x-nav-link>
                 </div>
@@ -75,7 +75,7 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('employeе.index')" :active="request()->routeIs('employeе.index')">
+            <x-responsive-nav-link :href="route('employee.index')" :active="request()->routeIs('employee.index')">
                 {{ __('Employees') }}
             </x-responsive-nav-link>
         </div>
