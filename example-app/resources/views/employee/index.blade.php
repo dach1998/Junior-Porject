@@ -1,3 +1,6 @@
+<head>
+    <title>Employees</title>
+</head>
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -28,7 +31,7 @@
                         <tbody>
                         @foreach ($employees as $employee)
                             <tr>
-                                <td class="px-4 py-3 border-b border-gray-700">{{ $employee->id }}</td>
+                                <td class="px-4 py-3 border-b border-gray-700"><a href="{{ route('employee.edit', $employee) }}">{{ $employee->id }}</a></td>
                                 <td class="px-4 py-3 border-b border-gray-700">{{ $employee->first_name }}</td>
                                 <td class="px-4 py-3 border-b border-gray-700">{{ $employee->last_name }}</td>
                                 <td class="px-4 py-3 border-b border-gray-700">{{ $employee->company }}</td>
