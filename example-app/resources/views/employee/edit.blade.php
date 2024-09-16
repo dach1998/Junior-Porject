@@ -12,8 +12,9 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg max-w-xl">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <div class="form-group">
-                        <form action="" method="post">
+                        <form action="{{ route('employee.update', $employee) }}" method="post">
                             @csrf
+                            @method('patch')
                             <div class="form-group mb-2">
                                 <label for="first_name">First Name</label>
                                 <input type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name" id="first_name" value="{{ $employee->first_name }}">
