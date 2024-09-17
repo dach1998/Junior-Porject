@@ -2,58 +2,77 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\EmployeeRequest;
 use App\Models\Employee;
 
 class EmployeeController extends Controller
 {
+    /**
+     * Отображает список всех сотрудников с постраничной навигацией.
+     *
+     * @return \Illuminate\View\View
+     */
     public function index()
     {
         $employees = Employee::paginate(10);
         return view('employee.index', compact('employees'));
     }
 
-
+    /**
+     * Возвращает представление для создания нового сотрудника.
+     *
+     * @return \Illuminate\View\View
+     */
     public function create()
     {
         return view('employee.create');
     }
 
-    public function store(Request $request)
+    /**
+     * Создает нового сотрудника на основе валидных данных из запроса.
+     *
+     * @param  \App\Http\Requests\EmployeeRequest  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store(EmployeeRequest $request)
     {
-        $data = $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'company' => 'required',
-            'email' => 'required|email|unique:employees,email',
-            'phone_number' => 'required|numeric|digits:11|unique:employees,phone_number',
-        ]);
-        Employee::create($data);
+        Employee::create($request->validated());
         return redirect()->route('employee.index');
     }
 
+    /**
+     * Возвращает представление для редактирования данных существующего сотрудника.
+     *
+     * @param  \App\Models\Employee  $employee
+     * @return \Illuminate\View\View
+     */
     public function edit(Employee $employee)
     {
         return view('employee.edit', compact('employee'));
     }
 
-    public function update(Request $request, Employee $employee)
+    /**
+     * Обновляет данные существующего сотрудника на основе валидных данных из запроса.
+     *
+     * @param  \App\Http\Requests\EmployeeRequest  $request
+     * @param  \App\Models\Employee  $employee
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(EmployeeRequest $request, Employee $employee)
     {
-        $data = $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'company' => 'required',
-            'email' => 'required|email|unique:employees,email,'.$employee->id,
-            'phone_number' => 'required|numeric|digits:11|unique:employees,phone_number,'.$employee->id,
-        ]);
-        $employee->update($data);
+        $employee->update($request->validated());
         return redirect()->route('employee.index');
     }
 
+    /**
+     * Удаляет существующего сотрудника.
+     *
+     * @param  \App\Models\Employee  $employee
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function destroy(Employee $employee)
     {
         $employee->delete();
         return redirect()->route('employee.index');
     }
-
 }
