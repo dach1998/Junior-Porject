@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('company_name')->nullable(false);
             $table->string('email');
             $table->string('logotype')->nullable();
+            $table->string('logotype_original_name')->nullable();
             $table->string('website');
             $table->timestamps();
 
